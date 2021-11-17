@@ -7,6 +7,9 @@ const { MongoClient } = require('mongodb');
 const app = express()
 const port = process.env.PORT || 5000;
 
+// middleweare
+app.use(cors());
+app.use(express.json());
 
 
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
@@ -15,9 +18,6 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
-// middleweare
-app.use(cors());
-app.use(express.json());
 
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.6re1r.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
